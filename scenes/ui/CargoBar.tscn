@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://dahylcy6pufwi"]
+
+[ext_resource type="Script" uid="uid://c3krm3rc80enq" path="res://scenes/ui/CargoBar.gd" id="1_m5m7o"]
+
+[node name="CargoBar" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 4.0
+grow_horizontal = 2
+script = ExtResource("1_m5m7o")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.20511743, 0.20511743, 0.20511743, 1)
+
+[node name="Fill" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5871506, 0.47786433, 0.09086894, 1)

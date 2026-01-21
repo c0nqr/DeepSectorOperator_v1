@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx30chntocoqm"]
+
+[ext_resource type="Script" uid="uid://jgtaqa0uwi6u" path="res://scenes/resources/ResourceNode.gd" id="1_73r4o"]
+[ext_resource type="Texture2D" uid="uid://dhdabbdqrvwhi" path="res://assets/miningnode_hellyeah.png" id="1_lqn2o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_73r4o"]
+radius = 396.01135
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxsgm"]
+radius = 487.00925
+
+[node name="ResourceNode" type="StaticBody2D"]
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_73r4o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lqn2o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-32, -11)
+shape = SubResource("CircleShape2D_73r4o")
+
+[node name="HoverDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoverDetector"]
+position = Vector2(-22, -3)
+shape = SubResource("CircleShape2D_cxsgm")
+
+[node name="ParkingMarker" type="Node2D" parent="."]
+position = Vector2(-1000, 0)

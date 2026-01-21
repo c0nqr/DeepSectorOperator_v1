@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckfjf2nvuqp6k"]
+
+[ext_resource type="Texture2D" uid="uid://7ufd7n8jmci2" path="res://assets/image-removebg-preview(2)(2).png" id="1_hpe7p"]
+[ext_resource type="Script" uid="uid://b0smjl5nmm623" path="res://scenes/enemies/Enemy.gd" id="1_k7o7a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k7o7a"]
+radius = 139.70326
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8axbs"]
+radius = 800.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_k7o7a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5707964
+texture = ExtResource("1_hpe7p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k7o7a")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_8axbs")

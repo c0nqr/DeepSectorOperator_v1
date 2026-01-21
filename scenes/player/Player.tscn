@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1kn7nbt802wj"]
+
+[ext_resource type="Script" uid="uid://bgmsltq8gk840" path="res://scenes/player/Player.gd" id="1_gfjak"]
+[ext_resource type="Texture2D" uid="uid://bbe2u0xb0fxtn" path="res://assets/Copilot_20260119_005700.png" id="2_4kuee"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v6fml"]
+radius = 96.02083
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 8
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_gfjak")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5707964
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_4kuee")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v6fml")
+
+[node name="WeaponMount" type="Node2D" parent="."]
+position = Vector2(71, -4)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.6, 0.6)
