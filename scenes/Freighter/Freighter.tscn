@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dahylcy6pufwi" path="res://scenes/ui/CargoBar.tscn" id="5_o0w3t"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3dfe"]
-radius = 225.0
+radius = 197.0
 height = 1394.0
 
 [node name="Freighter" type="CharacterBody2D"]
@@ -20,7 +20,6 @@ drone_scene = ExtResource("2_b801q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 3.1415927
-scale = Vector2(3, 3)
 texture = ExtResource("1_l0n40")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
