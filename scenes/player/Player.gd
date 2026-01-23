@@ -11,8 +11,6 @@ extends CharacterBody2D
 @export var target_detection_range: float = 800.0
 @export var target_indicator_scene: PackedScene
 
-@export var max_health: int = 100
-
 enum MoveState {
 	IDLE,
 	MOVING_TO_DESTINATION,
@@ -31,11 +29,7 @@ var locked_target: CharacterBody2D = null
 var fire_cooldown: float = 0.0
 var target_indicator: Node2D = null
 
-var current_health: int = 0
-
 @onready var weapon_mount: Node2D = $WeaponMount
-@onready var bars_container: Node2D = $BarsContainer
-@onready var health_bar: Control = $BarsContainer/HealthBar
 
 #signal freighter_requested(call_position: Vector2)
 signal auto_fire_toggled(enabled: bool)
@@ -46,12 +40,6 @@ signal target_unlocked()
 func _ready() -> void:
 	collision_layer = 1
 	collision_mask = 4
-	
-	current_health = max_health
-	
-	add_to_group("player")
-	
-	health_bar.initialize(max_health)
 	
 	if LevelManager:
 		LevelManager.register_player(self)
@@ -238,12 +226,3 @@ func rotate_to_target(target: Vector2) -> void:
 
 func set_rotation_target(target: Vector2) -> void:
 	rotate_to_target(target)
-
-
-func take_damage(amount: int) -> void:
-	current_health -= amount
-	health_bar.update_health(current_health)
-	print("Player took ", amount, " damage. HP: ", current_health, "/", max_health)
-	
-	if current_health <= 0:
-		print("Player would die here (death deferred to Phase 4)")

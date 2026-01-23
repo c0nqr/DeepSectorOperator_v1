@@ -1,30 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjjor362gsml6"]
+[gd_scene load_steps=5 format=3 uid="uid://cjjor362gsml6"]
 
 [ext_resource type="PackedScene" uid="uid://b1kn7nbt802wj" path="res://scenes/player/Player.tscn" id="1_lqkqs"]
 [ext_resource type="PackedScene" uid="uid://ckfjf2nvuqp6k" path="res://scenes/enemies/Enemy.tscn" id="2_lasrm"]
 [ext_resource type="PackedScene" uid="uid://dx30chntocoqm" path="res://scenes/resources/ResourceNode.tscn" id="3_6q7ns"]
 [ext_resource type="PackedScene" uid="uid://da8htg7y88mb0" path="res://scenes/Freighter/Freighter.tscn" id="4_q1jn4"]
-[ext_resource type="Texture2D" uid="uid://bhuryfnojcm6s" path="res://assets/SpaceLax1-Stars.png" id="5_gd5wc"]
-[ext_resource type="Texture2D" uid="uid://bpqrutypcyoye" path="res://assets/SpaceLax1-Gas.png" id="6_d1n6o"]
-[ext_resource type="PackedScene" uid="uid://dpxcux6dcnu8d" path="res://scenes/ui/WaveUI.tscn" id="7_d1n6o"]
 
 [node name="TestLevel" type="Node2D"]
-
-[node name="Parallax2D" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.05, 0.05)
-repeat_size = Vector2(1024, 1024)
-repeat_times = 6
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
-texture = ExtResource("5_gd5wc")
-
-[node name="Parallax2D2" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.3, 0.3)
-repeat_size = Vector2(1024, 1024)
-repeat_times = 6
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
-texture = ExtResource("6_d1n6o")
 
 [node name="ResourceNode" parent="." instance=ExtResource("3_6q7ns")]
 position = Vector2(2643, -253)
@@ -35,7 +16,8 @@ position = Vector2(-20, 1132)
 [node name="Enemy" parent="." instance=ExtResource("2_lasrm")]
 position = Vector2(-11, -142)
 
+[node name="Enemy2" parent="." instance=ExtResource("2_lasrm")]
+position = Vector2(1099, -171)
+
 [node name="Player" parent="." instance=ExtResource("1_lqkqs")]
 position = Vector2(961, 1142)
-
-[node name="WaveUI" parent="." instance=ExtResource("7_d1n6o")]

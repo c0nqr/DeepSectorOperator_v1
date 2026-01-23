@@ -38,8 +38,6 @@ func _ready() -> void:
 	
 	current_health = max_health
 	
-	add_to_group("freighter")
-	
 	global_position = jump_in_point
 	visible = false
 	
