@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3 uid="uid://bq7cqgv5kobo0"]
+
+[ext_resource type="Script" uid="uid://b1vjrliqsc46j" path="res://scenes/ui/BossHealthBar.gd" id="1_v8qyo"]
+
+[node name="BossHealthBar" type="CanvasLayer"]
+script = ExtResource("1_v8qyo")
+
+[node name="Container" type="Control" parent="."]
+custom_minimum_size = Vector2(600, 40)
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+pivot_offset = Vector2(0, 60)
+
+[node name="Panel" type="Panel" parent="Container"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 580.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Container/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Container/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Boss"
+horizontal_alignment = 1
+vertical_alignment = 1

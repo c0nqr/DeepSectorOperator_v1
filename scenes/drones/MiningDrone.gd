@@ -28,8 +28,8 @@ signal drone_destroyed(assigned_node: StaticBody2D)
 
 
 func _ready() -> void:
-	collision_layer = 32
-	collision_mask = 4
+	collision_layer = 2147483648
+	collision_mask = 524296
 	
 	current_health = max_health
 	current_cargo = 0

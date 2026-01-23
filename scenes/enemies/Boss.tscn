@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cffrltofyqrph"]
+
+[ext_resource type="Texture2D" uid="uid://ca2y37kxj4a3p" path="res://assets/image-removebg-preview(4).png" id="1_emdgg"]
+[ext_resource type="Script" uid="uid://dxlu8skb02bc8" path="res://scenes/enemies/Boss.gd" id="1_mj437"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mj437"]
+radius = 107.11676
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jlhw3"]
+radius = 1200.0
+
+[node name="Boss" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 3
+motion_mode = 1
+script = ExtResource("1_mj437")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5707964
+texture = ExtResource("1_emdgg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mj437")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_jlhw3")
+
+[node name="LaserBeam" type="Line2D" parent="."]
+visible = false
+width = 8.0
+default_color = Color(0.62240225, 0, 0.100840606, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LaserRaycast" type="RayCast2D" parent="."]
+target_position = Vector2(2000, 0)
+collision_mask = 2147516417

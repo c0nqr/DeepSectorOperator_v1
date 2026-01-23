@@ -6,6 +6,9 @@ var current_level_root: Node2D = null
 
 @export var boss_waiting_position: Vector2 = Vector2(1500, -500)
 
+@export var portal_spawn_position: Vector2 = Vector2(1500, 0)
+@export var portal_scene: PackedScene
+
 enum LevelState {
 	SCOUTING,
 	MINING,
@@ -67,6 +70,21 @@ func on_freighter_full() -> void:
 func on_boss_defeated() -> void:
 	current_state = LevelState.LEVEL_COMPLETE
 	boss_defeated.emit()
+	
+	spawn_portals()
+
+
+func spawn_portals() -> void:
+	if portal_scene == null:
+		push_error("Portal scene not assigned to LevelManager!")
+		return
+	
+	var portal: Area2D = portal_scene.instantiate()
+	current_level_root.add_child(portal)
+	portal.global_position = portal_spawn_position
+	portal.portal_type = "next_level"
+	
+	print("Portal spawned at: ", portal_spawn_position)
 
 
 func transition_to_vault() -> void:

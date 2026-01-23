@@ -22,7 +22,7 @@ LevelManager="*res://scripts/autoloads/LevelManager.gd"
 
 [display]
 
-window/size/mode=3
+window/size/mode=2
 
 [input]
 
@@ -56,4 +56,5 @@ target_cycle={
 2d_physics/layer_4="Enemies"
 2d_physics/layer_8="Resources"
 2d_physics/layer_16="Freighter"
+2d_physics/layer_20="EnemyProjectiles"
 2d_physics/layer_32="Drones"

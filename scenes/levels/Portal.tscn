@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0hshtfr52fux"]
+
+[ext_resource type="Script" uid="uid://db3yg7k3q88ao" path="res://scenes/levels/Portal.gd" id="1_3q88l"]
+[ext_resource type="Texture2D" uid="uid://4vhrcupywsqf" path="res://assets/gate1.png" id="1_chxgr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3q88l"]
+radius = 195.01025
+
+[node name="Portal" type="Area2D"]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_3q88l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_chxgr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3q88l")

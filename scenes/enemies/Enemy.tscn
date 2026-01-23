@@ -1,19 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckfjf2nvuqp6k"]
+[gd_scene load_steps=6 format=3 uid="uid://ckfjf2nvuqp6k"]
 
 [ext_resource type="Texture2D" uid="uid://7ufd7n8jmci2" path="res://assets/image-removebg-preview(2)(2).png" id="1_hpe7p"]
 [ext_resource type="Script" uid="uid://b0smjl5nmm623" path="res://scenes/enemies/Enemy.gd" id="1_k7o7a"]
+[ext_resource type="PackedScene" uid="uid://dgvkkipqdsaal" path="res://scenes/enemies/EnemyProjectile.tscn" id="2_8axbs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k7o7a"]
 radius = 139.70326
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8axbs"]
-radius = 800.0
+radius = 1000.0
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_k7o7a")
+max_speed = 500.0
+acceleration = 500.0
+fire_rate = 5.0
+projectile_scene = ExtResource("2_8axbs")
+retarget_interval = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5707964
