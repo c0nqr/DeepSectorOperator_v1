@@ -1,15 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbloqi5c5obf7"]
+[gd_scene load_steps=7 format=3 uid="uid://bbloqi5c5obf7"]
 
-[ext_resource type="Texture2D" uid="uid://4vhrcupywsqf" path="res://assets/gate1.png" id="1_5j8lu"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_03cd5"]
+[ext_resource type="Script" uid="uid://ci6xa4vc7717u" path="res://scenes/levels/HomeMap.gd" id="1_ysfgw"]
+[ext_resource type="Texture2D" uid="uid://bhuryfnojcm6s" path="res://assets/SpaceLax1-Stars.png" id="2_5ncun"]
+[ext_resource type="Texture2D" uid="uid://bpqrutypcyoye" path="res://assets/SpaceLax1-Gas.png" id="3_i7l5b"]
+[ext_resource type="PackedScene" uid="uid://b1kn7nbt802wj" path="res://scenes/player/Player.tscn" id="4_pitbg"]
+[ext_resource type="PackedScene" uid="uid://b0hshtfr52fux" path="res://scenes/levels/Portal.tscn" id="5_wru4p"]
+[ext_resource type="PackedScene" uid="uid://cvqoq55wcwb4e" path="res://scenes/ui/HomeMapUI.tscn" id="6_5ncun"]
 
 [node name="HomeMap" type="Node2D"]
+script = ExtResource("1_ysfgw")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.05, 0.05)
+repeat_size = Vector2(1024, 1024)
+repeat_times = 6
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-texture = ExtResource("1_5j8lu")
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture = ExtResource("2_5ncun")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_03cd5")
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(1024, 1024)
+repeat_times = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+texture = ExtResource("3_i7l5b")
+
+[node name="Player" parent="." instance=ExtResource("4_pitbg")]
+position = Vector2(500, 300)
+
+[node name="Portal" parent="." instance=ExtResource("5_wru4p")]
+position = Vector2(800, 300)
+portal_type = "test_level"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(500, 300)
+
+[node name="HomeMapUI" parent="." instance=ExtResource("6_5ncun")]

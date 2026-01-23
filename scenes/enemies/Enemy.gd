@@ -121,12 +121,11 @@ func fire_at_target() -> void:
 		return
 	
 	var projectile: Area2D = projectile_scene.instantiate()
-	get_tree().root.add_child(projectile)
+	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position
 	
 	var fire_direction: Vector2 = (current_target.global_position - global_position).normalized()
 	projectile.initialize(fire_direction, rotation)
-
 
 func find_nearest_target() -> void:
 	var potential_targets: Array[Node2D] = []

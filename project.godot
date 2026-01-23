@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Deep Sector Operator"
-run/main_scene="uid://cjjor362gsml6"
+run/main_scene="uid://bbloqi5c5obf7"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://assets/icon.svg"
 

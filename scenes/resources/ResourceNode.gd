@@ -3,16 +3,19 @@ extends StaticBody2D
 @export var max_resources: int = 100
 @export var mining_rate: int = 5
 @export var enemy_scene: PackedScene
-@export var spawn_interval_start: float = 5.0
-@export var spawn_interval_min: float = 2.0
-@export var spawn_acceleration: float = 0.9
+@export var enemies_per_wave: int = 10
+@export var total_waves: int = 3
+@export var delay_between_waves: float = 10.0
+@export var spawn_interval_within_wave: float = 0.5
 
 var current_resources: int = 0
 var is_mouse_hovering: bool = false
 var is_being_mined: bool = false
-var spawn_timer: float = 0.0
-var current_spawn_interval: float = 5.0
-var enemies_spawned: int = 0
+var current_wave: int = 0
+var enemies_spawned_this_wave: int = 0
+var wave_spawn_timer: float = 0.0
+var wave_delay_timer: float = 0.0
+var waiting_for_next_wave: bool = false
 
 @onready var hover_detector: Area2D = $HoverDetector
 @onready var parking_marker: Node2D = $ParkingMarker
@@ -25,7 +28,6 @@ signal hover_ended()
 
 func _ready() -> void:
 	current_resources = max_resources
-	current_spawn_interval = spawn_interval_start
 	add_to_group("resource_nodes")
 	
 	hover_detector.mouse_entered.connect(_on_mouse_entered)
@@ -58,13 +60,36 @@ func _process(delta: float) -> void:
 
 
 func process_wave_spawning(delta: float) -> void:
-	spawn_timer -= delta
+	if current_wave >= total_waves:
+		return
 	
-	if spawn_timer <= 0.0:
+	if waiting_for_next_wave:
+		wave_delay_timer -= delta
+		if wave_delay_timer <= 0.0:
+			waiting_for_next_wave = false
+			current_wave += 1
+			enemies_spawned_this_wave = 0
+			wave_spawn_timer = 0.0
+			
+			if current_wave < total_waves:
+				print(name, " - Wave ", current_wave + 1, " starting!")
+		return
+	
+	wave_spawn_timer -= delta
+	
+	if wave_spawn_timer <= 0.0 and enemies_spawned_this_wave < enemies_per_wave:
 		spawn_enemy()
-		spawn_timer = current_spawn_interval
+		enemies_spawned_this_wave += 1
+		wave_spawn_timer = spawn_interval_within_wave
 		
-		current_spawn_interval = max(current_spawn_interval * spawn_acceleration, spawn_interval_min)
+		if enemies_spawned_this_wave >= enemies_per_wave:
+			if current_wave < total_waves - 1:
+				waiting_for_next_wave = true
+				wave_delay_timer = delay_between_waves
+				print(name, " - Wave ", current_wave + 1, " complete. Next wave in ", delay_between_waves, " seconds.")
+			else:
+				current_wave = total_waves
+				print(name, " - All waves complete!")
 
 
 func spawn_enemy() -> void:
@@ -73,12 +98,10 @@ func spawn_enemy() -> void:
 		return
 	
 	var enemy: CharacterBody2D = enemy_scene.instantiate()
-	get_tree().root.add_child(enemy)
+	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = enemy_spawn_point.global_position
 	
-	enemies_spawned += 1
-	print("Wave enemy spawned (", enemies_spawned, ") at ", name)
-
+	print(name, " - Wave ", current_wave + 1, ": Enemy ", enemies_spawned_this_wave + 1, "/", enemies_per_wave, " spawned")
 
 func extract_resources(amount: int) -> int:
 	var extracted: int = min(amount, current_resources)
@@ -98,15 +121,16 @@ func get_parking_position() -> Vector2:
 
 func _on_mining_started() -> void:
 	is_being_mined = true
-	spawn_timer = spawn_interval_start
-	current_spawn_interval = spawn_interval_start
-	enemies_spawned = 0
-	print(name, " mining started - waves beginning")
+	current_wave = 0
+	enemies_spawned_this_wave = 0
+	wave_spawn_timer = 0.0
+	waiting_for_next_wave = false
+	print(name, " - Mining started. Wave 1 beginning!")
 
 
 func _on_mining_completed() -> void:
 	is_being_mined = false
-	print(name, " mining completed - waves stopped")
+	print(name, " - Mining completed. Waves stopped.")
 
 
 func _on_mouse_entered() -> void:

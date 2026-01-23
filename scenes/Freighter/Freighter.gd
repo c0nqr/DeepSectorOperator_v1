@@ -122,7 +122,7 @@ func spawn_drone() -> void:
 		return
 	
 	var drone: CharacterBody2D = drone_scene.instantiate()
-	get_tree().root.add_child(drone)
+	get_tree().current_scene.add_child(drone)
 	drone.global_position = drone_spawn_point.global_position
 	drone.initialize(assigned_resource_node, self)
 	
@@ -143,6 +143,22 @@ func _on_drone_destroyed(node: StaticBody2D) -> void:
 		drone.initialize(node, self)
 		active_drone = drone
 		drone.drone_destroyed.connect(_on_drone_destroyed)
+		
+func _spawn_replacement_drone(node: StaticBody2D) -> void:
+	if drone_scene == null:
+		return
+	
+	if node == null or !is_instance_valid(node):
+		print("Resource node no longer exists, cannot spawn replacement drone")
+		return
+	
+	var drone: CharacterBody2D = drone_scene.instantiate()
+	get_tree().current_scene.add_child(drone)
+	drone.global_position = drone_spawn_point.global_position
+	drone.initialize(node, self)
+	active_drone = drone
+	drone.drone_destroyed.connect(_on_drone_destroyed)
+	print("Replacement drone deployed after 5 second delay")
 
 
 func add_cargo(amount: int) -> void:

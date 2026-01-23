@@ -148,12 +148,11 @@ func fire_projectile() -> void:
 		return
 	
 	var projectile: Area2D = projectile_scene.instantiate()
-	get_tree().root.add_child(projectile)
+	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = weapon_mount.global_position
 	
 	var fire_direction: Vector2 = Vector2.RIGHT.rotated(rotation)
 	projectile.initialize(fire_direction, rotation)
-
 
 func cycle_target() -> void:
 	var enemies: Array = get_tree().get_nodes_in_group("enemies")
@@ -246,4 +245,17 @@ func take_damage(amount: int) -> void:
 	print("Player took ", amount, " damage. HP: ", current_health, "/", max_health)
 	
 	if current_health <= 0:
-		print("Player would die here (death deferred to Phase 4)")
+		die()
+
+
+func die() -> void:
+	print("=== PLAYER DIED ===")
+	print("Lost cargo: ", GlobalData.cargo.current_resources)
+	
+	GlobalData.reset_cargo()
+	
+	call_deferred("_change_to_home")
+
+
+func _change_to_home() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/HomeMap.tscn")

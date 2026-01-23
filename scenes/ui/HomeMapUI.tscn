@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvqoq55wcwb4e"]
+
+[ext_resource type="Script" uid="uid://dfba7hd0xhcsm" path="res://scenes/ui/HomeMapUI.gd" id="1_mxus0"]
+
+[node name="HomeMapUI" type="CanvasLayer"]
+script = ExtResource("1_mxus0")
+
+[node name="Container" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 60.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "===Vault==="
+
+[node name="VaultLabel" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Credits: 0"
+
+[node name="CargoLabel" type="Label" parent="Container/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Cargo: 0"
