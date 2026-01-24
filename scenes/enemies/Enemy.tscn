@@ -5,24 +5,27 @@
 [ext_resource type="PackedScene" uid="uid://dgvkkipqdsaal" path="res://scenes/enemies/EnemyProjectile.tscn" id="2_8axbs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k7o7a"]
-radius = 139.70326
+radius = 79.025314
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8axbs"]
 radius = 1000.0
 
 [node name="Enemy" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 3
+collision_layer = 4
+collision_mask = 51
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_k7o7a")
 max_speed = 500.0
 acceleration = 500.0
-fire_rate = 5.0
+weapon_range = 500.0
+fire_rate = 0.2
 projectile_scene = ExtResource("2_8axbs")
 retarget_interval = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5707964
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_hpe7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

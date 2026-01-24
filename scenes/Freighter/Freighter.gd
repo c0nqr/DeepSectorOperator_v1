@@ -31,15 +31,11 @@ var active_drone: CharacterBody2D = null
 signal arrived_at_destination()
 signal cargo_full()
 
-
 func _ready() -> void:
 	collision_layer = 16
 	collision_mask = 4
-	
 	current_health = max_health
-	
 	add_to_group("freighter")
-	
 	global_position = jump_in_point
 	visible = false
 	
@@ -49,26 +45,20 @@ func _ready() -> void:
 	if LevelManager:
 		LevelManager.register_freighter(self)
 
-
 func _physics_process(delta: float) -> void:
 	match current_state:
 		FreighterState.WAITING:
 			pass
-		
 		FreighterState.JUMPING_IN:
 			current_state = FreighterState.TRAVELING
-		
 		FreighterState.TRAVELING:
 			process_travel(delta)
-		
 		FreighterState.PARKED:
 			velocity = Vector2.ZERO
-		
 		FreighterState.DEPARTING:
 			process_travel(delta)
 	
 	move_and_slide()
-
 
 func move_to_position(target_position: Vector2, resource_node: StaticBody2D = null) -> void:
 	destination = target_position
@@ -82,7 +72,6 @@ func move_to_position(target_position: Vector2, resource_node: StaticBody2D = nu
 		current_state = FreighterState.TRAVELING
 		print("Freighter destination updated")
 
-
 func process_travel(delta: float) -> void:
 	var distance_to_destination: float = global_position.distance_to(destination)
 	
@@ -91,26 +80,20 @@ func process_travel(delta: float) -> void:
 			current_state = FreighterState.PARKED
 			velocity = Vector2.ZERO
 			arrived_at_destination.emit()
-			
 			if LevelManager:
 				LevelManager.on_freighter_arrived()
-			
 			spawn_drone()
 			print("Freighter arrived and parked")
-		
 		elif current_state == FreighterState.DEPARTING:
 			current_state = FreighterState.PARKED
 			velocity = Vector2.ZERO
 			print("Freighter reached waiting area")
-		
 		return
 	
 	var direction: Vector2 = (destination - global_position).normalized()
 	look_at(destination)
-	
 	var desired_velocity: Vector2 = direction * max_speed
 	velocity = velocity.move_toward(desired_velocity, acceleration * delta)
-
 
 func spawn_drone() -> void:
 	if drone_scene == null:
@@ -120,52 +103,35 @@ func spawn_drone() -> void:
 	if assigned_resource_node == null:
 		print("No resource node assigned, skipping drone deployment")
 		return
-	
-	var drone: CharacterBody2D = drone_scene.instantiate()
-	get_tree().current_scene.add_child(drone)
-	drone.global_position = drone_spawn_point.global_position
-	drone.initialize(assigned_resource_node, self)
-	
-	active_drone = drone
-	drone.drone_destroyed.connect(_on_drone_destroyed)
-	
-	print("Freighter deployed mining drone")
 
+	# We use call_deferred here to be safe, as this is often called 
+	# right after a state change or collision event
+	call_deferred("_do_spawn_drone", assigned_resource_node)
 
 func _on_drone_destroyed(node: StaticBody2D) -> void:
-	print("Freighter: Drone destroyed, spawning replacement")
+	print("Freighter: Drone destroyed, scheduling replacement")
 	active_drone = null
-	
+	# The fix: Defer the spawning so it happens after the physics step
 	if node != null and is_instance_valid(node):
-		var drone: CharacterBody2D = drone_scene.instantiate()
-		get_tree().root.add_child(drone)
-		drone.global_position = drone_spawn_point.global_position
-		drone.initialize(node, self)
-		active_drone = drone
-		drone.drone_destroyed.connect(_on_drone_destroyed)
+		call_deferred("_do_spawn_drone", node)
+
+# Helper function to handle the actual instantiation safely
+func _do_spawn_drone(target_node: StaticBody2D) -> void:
+	if drone_scene == null or !is_instance_valid(target_node):
+		return
 		
-func _spawn_replacement_drone(node: StaticBody2D) -> void:
-	if drone_scene == null:
-		return
-	
-	if node == null or !is_instance_valid(node):
-		print("Resource node no longer exists, cannot spawn replacement drone")
-		return
-	
 	var drone: CharacterBody2D = drone_scene.instantiate()
 	get_tree().current_scene.add_child(drone)
 	drone.global_position = drone_spawn_point.global_position
-	drone.initialize(node, self)
+	drone.initialize(target_node, self)
 	active_drone = drone
 	drone.drone_destroyed.connect(_on_drone_destroyed)
-	print("Replacement drone deployed after 5 second delay")
-
+	print("Drone deployed successfully")
 
 func add_cargo(amount: int) -> void:
 	current_cargo += amount
 	cargo_bar.update_cargo(current_cargo)
 	GlobalData.add_cargo(amount)
-	
 	print("Freighter cargo: ", current_cargo, "/", max_cargo)
 	
 	if current_cargo >= max_cargo:
@@ -173,10 +139,8 @@ func add_cargo(amount: int) -> void:
 		if LevelManager:
 			LevelManager.on_freighter_full()
 
-
 func is_cargo_full() -> bool:
 	return current_cargo >= max_cargo
-
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
@@ -186,11 +150,11 @@ func take_damage(amount: int) -> void:
 	if current_health <= 0:
 		die()
 
-
 func die() -> void:
-	print("Freighter destroyed!")
+	print("Freighter destroyed! Going home.")
+	GlobalData.transfer_cargo_to_vault()
+	get_tree().change_scene_to_file("res://scenes/levels/HomeMap.tscn")
 	queue_free()
-
 
 func depart_to_waiting_area(waiting_position: Vector2) -> void:
 	destination = waiting_position

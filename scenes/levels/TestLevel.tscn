@@ -42,9 +42,10 @@ position = Vector2(-2307, -2242)
 
 [node name="Freighter" parent="." instance=ExtResource("4_q1jn4")]
 position = Vector2(-20, 1132)
+arrival_distance = 5.0
 
 [node name="Enemy" parent="." instance=ExtResource("2_lasrm")]
-position = Vector2(-11, -142)
+position = Vector2(2690, -384)
 
 [node name="Player" parent="." instance=ExtResource("1_lqkqs")]
-position = Vector2(961, 1142)
+position = Vector2(1000, 1200)

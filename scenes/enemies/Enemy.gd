@@ -32,6 +32,8 @@ func _ready() -> void:
 	collision_layer = 4
 	collision_mask = 1 + 2 + 16 + 32
 	
+	#current_state = EnemyState.IDLE
+	
 	current_health = max_health
 	retarget_timer = retarget_interval
 	
@@ -79,6 +81,7 @@ func process_chasing(delta: float) -> void:
 	if distance_to_target <= weapon_range:
 		current_state = EnemyState.ATTACKING
 		return
+
 	
 	var direction: Vector2 = (current_target.global_position - global_position).normalized()
 	look_at(current_target.global_position)
@@ -179,7 +182,6 @@ func take_damage(amount: int) -> void:
 		return
 	
 	current_health -= amount
-	print(name, " took ", amount, " damage. Health: ", current_health, "/", max_health)
 	
 	if current_health <= 0:
 		die()

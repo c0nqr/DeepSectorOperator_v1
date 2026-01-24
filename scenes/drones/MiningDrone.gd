@@ -112,7 +112,6 @@ func process_mining(delta: float) -> void:
 			current_cargo += extracted
 			if cargo_bar.has_method("update_cargo"):
 				cargo_bar.update_cargo(current_cargo)
-			print("Drone mined 1 resource. Cargo: ", current_cargo, "/", max_cargo_capacity)
 		else:
 			print("Drone: node depleted, returning")
 			current_state = DroneState.RETURNING
@@ -158,7 +157,7 @@ func process_deposit() -> void:
 		cargo_bar.update_cargo(0)
 	
 	if !is_instance_valid(assigned_node):
-		print("Drone: node depleted, mission complete")
+		print("Drone: node depleted, returning")
 		queue_free()
 		return
 	
@@ -167,7 +166,7 @@ func process_deposit() -> void:
 		freighter_full = parent_freighter.is_cargo_full()
 		
 	if freighter_full:
-		print("Drone: freighter full, mission complete")
+		print("Drone: freighter full, docking")
 		queue_free()
 		return
 	
@@ -179,7 +178,6 @@ func take_damage(amount: int) -> void:
 	current_health -= amount
 	if health_bar.has_method("update_health"):
 		health_bar.update_health(current_health)
-	print("Drone took ", amount, " damage. HP: ", current_health, "/", max_health)
 	
 	if current_health <= 0:
 		die()

@@ -12,9 +12,10 @@ height = 1394.0
 
 [node name="Freighter" type="CharacterBody2D"]
 collision_layer = 32768
-collision_mask = 8
+collision_mask = 524296
 motion_mode = 1
 script = ExtResource("1_r3dfe")
+max_health = 2000
 acceleration = 50.0
 drone_scene = ExtResource("2_b801q")
 

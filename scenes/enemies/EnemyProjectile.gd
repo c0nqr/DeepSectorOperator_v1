@@ -11,6 +11,8 @@ func _ready() -> void:
 	var timer: SceneTreeTimer = get_tree().create_timer(lifetime)
 	timer.timeout.connect(queue_free)
 	
+	collision_mask = 1 + 16 + 2147483648
+	
 	body_entered.connect(_on_body_entered)
 
 

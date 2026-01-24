@@ -9,10 +9,10 @@ height = 84.0
 
 [node name="EnemyProjectile" type="Area2D"]
 collision_layer = 524288
-collision_mask = 2147483649
-monitoring = true 
+collision_mask = 2147516419
 monitorable = false
 script = ExtResource("1_cmmky")
+speed = 800.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_r1yng")

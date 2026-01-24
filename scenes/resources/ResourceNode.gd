@@ -79,6 +79,7 @@ func process_wave_spawning(delta: float) -> void:
 	
 	if wave_spawn_timer <= 0.0 and enemies_spawned_this_wave < enemies_per_wave:
 		spawn_enemy()
+		
 		enemies_spawned_this_wave += 1
 		wave_spawn_timer = spawn_interval_within_wave
 		

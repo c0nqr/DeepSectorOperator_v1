@@ -5,7 +5,6 @@ extends Node2D
 
 
 func _ready() -> void:
-	print("=== TEST LEVEL LOADED ===")
 	
 	if LevelManager:
 		LevelManager.register_level_root(self)

@@ -16,9 +16,6 @@ collision_layer = 128
 collision_mask = 0
 script = ExtResource("1_73r4o")
 enemy_scene = ExtResource("2_p2tn5")
-spawn_interval_start = 1.0
-spawn_interval_min = 1.0
-spawn_acceleration = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_lqn2o")
@@ -41,7 +38,7 @@ shape = SubResource("CircleShape2D_cxsgm")
 position = Vector2(-1000, 0)
 
 [node name="EnemySpawnPoint" type="Marker2D" parent="."]
-position = Vector2(381, -117)
+position = Vector2(514, -118)
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemySpawnPoint"]
 position = Vector2(0, -2)
