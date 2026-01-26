@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://da8htg7y88mb0"]
 
-[ext_resource type="Texture2D" uid="uid://bdlyfw7s255qr" path="res://assets/poopy.png" id="1_l0n40"]
+[ext_resource type="Texture2D" uid="uid://bdlyfw7s255qr" path="res://assets/Freighter.png" id="1_l0n40"]
 [ext_resource type="Script" uid="uid://j383vk55kxtc" path="res://scenes/Freighter/Freighter.gd" id="1_r3dfe"]
 [ext_resource type="PackedScene" uid="uid://n5y8h1ny4h6r" path="res://scenes/drones/MiningDrone.tscn" id="2_b801q"]
 [ext_resource type="PackedScene" uid="uid://clv6xqtfgmqdp" path="res://scenes/ui/HealthBar.tscn" id="4_q6238"]

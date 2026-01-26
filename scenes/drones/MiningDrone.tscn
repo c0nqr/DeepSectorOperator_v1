@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://n5y8h1ny4h6r"]
 
 [ext_resource type="Script" uid="uid://bnu2ks34dmqof" path="res://scenes/drones/MiningDrone.gd" id="1_5b6eq"]
-[ext_resource type="Texture2D" uid="uid://d1s12nusq1u4t" path="res://assets/Gemini_Generated_Image_bums5ubums5ubums-removebg-preview.png" id="1_1180t"]
+[ext_resource type="Texture2D" uid="uid://d1s12nusq1u4t" path="res://assets/MiningDrone.png" id="1_1180t"]
 [ext_resource type="PackedScene" uid="uid://clv6xqtfgmqdp" path="res://scenes/ui/HealthBar.tscn" id="2_5b6eq"]
 [ext_resource type="PackedScene" uid="uid://dahylcy6pufwi" path="res://scenes/ui/CargoBar.tscn" id="3_ocngy"]
 

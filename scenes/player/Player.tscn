@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b1kn7nbt802wj"]
 
 [ext_resource type="Script" uid="uid://bgmsltq8gk840" path="res://scenes/player/Player.gd" id="1_gfjak"]
-[ext_resource type="Texture2D" uid="uid://b5m1et10ojfln" path="res://assets/playerShip01.png" id="2_gfjak"]
+[ext_resource type="Texture2D" uid="uid://b5m1et10ojfln" path="res://assets/Player_Ship.png" id="2_gfjak"]
 [ext_resource type="PackedScene" uid="uid://d30k47ua2qr2f" path="res://scenes/player/Projectile.tscn" id="2_tpg5x"]
 [ext_resource type="PackedScene" uid="uid://clv6xqtfgmqdp" path="res://scenes/ui/HealthBar.tscn" id="3_4kuee"]
 [ext_resource type="PackedScene" uid="uid://bxe2omkxlejfe" path="res://scenes/player/TargetIndicator.tscn" id="3_c3xxp"]

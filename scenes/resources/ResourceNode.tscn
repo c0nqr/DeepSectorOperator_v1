@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dx30chntocoqm"]
 
 [ext_resource type="Script" uid="uid://jgtaqa0uwi6u" path="res://scenes/resources/ResourceNode.gd" id="1_73r4o"]
-[ext_resource type="Texture2D" uid="uid://dhdabbdqrvwhi" path="res://assets/miningnode_hellyeah.png" id="1_lqn2o"]
+[ext_resource type="Texture2D" uid="uid://dhdabbdqrvwhi" path="res://assets/MiningNode.png" id="1_lqn2o"]
 [ext_resource type="PackedScene" uid="uid://ckfjf2nvuqp6k" path="res://scenes/enemies/Enemy.tscn" id="2_p2tn5"]
-[ext_resource type="Texture2D" uid="uid://cnganch7un3xt" path="res://assets/frat.png" id="4_p2tn5"]
+[ext_resource type="Texture2D" uid="uid://cnganch7un3xt" path="res://assets/FURat.png" id="4_p2tn5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_73r4o"]
 radius = 396.01135

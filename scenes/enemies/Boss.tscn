@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cffrltofyqrph"]
 
-[ext_resource type="Texture2D" uid="uid://ca2y37kxj4a3p" path="res://assets/image-removebg-preview(4).png" id="1_emdgg"]
+[ext_resource type="Texture2D" uid="uid://ca2y37kxj4a3p" path="res://assets/BossShip.png" id="1_emdgg"]
 [ext_resource type="Script" uid="uid://dxlu8skb02bc8" path="res://scenes/enemies/Boss.gd" id="1_mj437"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mj437"]

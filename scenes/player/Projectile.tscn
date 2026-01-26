@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d30k47ua2qr2f"]
 
 [ext_resource type="Script" uid="uid://dnk8nk5ykqvgq" path="res://scenes/player/Projectile.gd" id="1_k3qbq"]
-[ext_resource type="Texture2D" uid="uid://chg85jriquxro" path="res://assets/25.png" id="2_kimj4"]
+[ext_resource type="Texture2D" uid="uid://chg85jriquxro" path="res://assets/Player_Laser.png" id="2_kimj4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vihyi"]
 radius = 9.0

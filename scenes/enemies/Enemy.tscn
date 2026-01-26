@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ckfjf2nvuqp6k"]
 
-[ext_resource type="Texture2D" uid="uid://7ufd7n8jmci2" path="res://assets/image-removebg-preview(2)(2).png" id="1_hpe7p"]
+[ext_resource type="Texture2D" uid="uid://7ufd7n8jmci2" path="res://assets/EnemyShip.png" id="1_hpe7p"]
 [ext_resource type="Script" uid="uid://b0smjl5nmm623" path="res://scenes/enemies/Enemy.gd" id="1_k7o7a"]
 [ext_resource type="PackedScene" uid="uid://dgvkkipqdsaal" path="res://scenes/enemies/EnemyProjectile.tscn" id="2_8axbs"]
 
