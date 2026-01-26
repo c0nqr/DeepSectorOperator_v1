@@ -10,12 +10,13 @@
 radius = 43.011627
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 8
+collision_mask = 524296
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_gfjak")
 max_speed = 600.0
 deceleration = 300.0
+fire_rate = 0.15
 projectile_scene = ExtResource("2_tpg5x")
 target_indicator_scene = ExtResource("3_c3xxp")
 

@@ -41,8 +41,8 @@ position = Vector2(2643, -253)
 position = Vector2(-2307, -2242)
 
 [node name="Freighter" parent="." instance=ExtResource("4_q1jn4")]
-position = Vector2(-20, 1132)
-arrival_distance = 5.0
+position = Vector2(-2702, 3110)
+arrival_distance = 1.0
 
 [node name="Enemy" parent="." instance=ExtResource("2_lasrm")]
 position = Vector2(2690, -384)

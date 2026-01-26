@@ -3,7 +3,8 @@ extends CharacterBody2D
 @export var max_health: int = 800
 @export var max_speed: float = 200.0
 @export var acceleration: float = 600.0
-@export var chase_distance: float = 150.0
+## this is how you add descriptions for exported vars in editor. you will want to start doing this, for now obviously so you know what does what but also for a year from now when you decide to work on the project again
+@export var chase_distance: float = 1000.0 
 @export var laser_damage_per_second: int = 25
 @export var laser_duration: float = 2.0
 @export var laser_cooldown: float = 3.0
@@ -23,6 +24,7 @@ var target_player: CharacterBody2D = null
 var laser_timer: float = 0.0
 var laser_cooldown_timer: float = 0.0
 var laser_active: bool = false
+var laser_damage_pending: float = 0.0
 
 @onready var detection_area: Area2D = $DetectionArea
 @onready var laser_beam: Line2D = $LaserBeam
@@ -37,6 +39,9 @@ func _ready() -> void:
 	
 	current_health = max_health
 	laser_cooldown_timer = laser_cooldown
+
+	laser_raycast.enabled = true
+	laser_raycast.collision_mask = 1 # Ensure the laser detects the player (layer 1)
 	
 	add_to_group("enemies")
 	add_to_group("boss")
@@ -90,12 +95,15 @@ func process_chasing(delta: float) -> void:
 		velocity = Vector2.ZERO
 		print("Boss firing laser!")
 		return
-	
-	var direction: Vector2 = (target_player.global_position - global_position).normalized()
-	look_at(target_player.global_position)
-	
-	var desired_velocity: Vector2 = direction * max_speed
-	velocity = velocity.move_toward(desired_velocity, acceleration * delta)
+
+	var min_distance = 350.0
+	if distance_to_player > min_distance:
+		var direction: Vector2 = (target_player.global_position - global_position).normalized()
+		look_at(target_player.global_position)
+		var desired_velocity: Vector2 = direction * max_speed
+		velocity = velocity.move_toward(desired_velocity, acceleration * delta)
+	else:
+		velocity = velocity.move_toward(Vector2.ZERO, acceleration * delta)
 
 
 func process_laser(delta: float) -> void:
@@ -115,8 +123,11 @@ func process_laser(delta: float) -> void:
 		
 		var hit_body: Node = laser_raycast.get_collider()
 		if hit_body != null and hit_body.has_method("take_damage"):
-			var damage_this_frame: int = int(laser_damage_per_second * delta)
-			hit_body.take_damage(damage_this_frame)
+			laser_damage_pending += laser_damage_per_second * delta
+			var damage_to_apply = int(laser_damage_pending)
+			if damage_to_apply > 0:
+				hit_body.take_damage(damage_to_apply)
+				laser_damage_pending -= damage_to_apply
 	else:
 		laser_end = laser_raycast.target_position
 	
