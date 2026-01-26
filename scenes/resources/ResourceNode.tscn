@@ -16,6 +16,7 @@ collision_layer = 128
 collision_mask = 0
 script = ExtResource("1_73r4o")
 enemy_scene = ExtResource("2_p2tn5")
+dock_rotation_degrees = -90.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_lqn2o")
@@ -35,7 +36,8 @@ position = Vector2(-22, -3)
 shape = SubResource("CircleShape2D_cxsgm")
 
 [node name="ParkingMarker" type="Node2D" parent="."]
-position = Vector2(-1000, 0)
+position = Vector2(-1200, 0)
+skew = -1.569051
 
 [node name="EnemySpawnPoint" type="Marker2D" parent="."]
 position = Vector2(514, -118)
@@ -43,3 +45,5 @@ position = Vector2(514, -118)
 [node name="Sprite2D" type="Sprite2D" parent="EnemySpawnPoint"]
 position = Vector2(0, -2)
 texture = ExtResource("4_p2tn5")
+
+[node name="DockDirection" type="Node2D" parent="."]

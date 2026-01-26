@@ -7,6 +7,7 @@ extends StaticBody2D
 @export var total_waves: int = 3
 @export var delay_between_waves: float = 10.0
 @export var spawn_interval_within_wave: float = 0.5
+@export var dock_rotation_degrees := 0.0
 
 var current_resources: int = 0
 var is_mouse_hovering: bool = false

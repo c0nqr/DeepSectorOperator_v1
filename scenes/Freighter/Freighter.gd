@@ -80,6 +80,8 @@ func process_travel(delta: float) -> void:
 			current_state = FreighterState.PARKED
 			velocity = Vector2.ZERO
 			arrived_at_destination.emit()
+			if assigned_resource_node != null:
+				dock_at_node(assigned_resource_node)
 			if LevelManager:
 				LevelManager.on_freighter_arrived()
 			spawn_drone()
@@ -94,6 +96,11 @@ func process_travel(delta: float) -> void:
 	look_at(destination)
 	var desired_velocity: Vector2 = direction * max_speed
 	velocity = velocity.move_toward(desired_velocity, acceleration * delta)
+
+
+func dock_at_node(resource_node):
+	self.global_rotation = deg_to_rad(resource_node.dock_rotation_degrees)
+
 
 func spawn_drone() -> void:
 	if drone_scene == null:
