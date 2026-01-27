@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1kn7nbt802wj"]
+[gd_scene format=3 uid="uid://b1kn7nbt802wj"]
 
 [ext_resource type="Script" uid="uid://bgmsltq8gk840" path="res://scenes/player/Player.gd" id="1_gfjak"]
 [ext_resource type="Texture2D" uid="uid://b5m1et10ojfln" path="res://assets/Player_Ship.png" id="2_gfjak"]
@@ -9,7 +9,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_v6fml"]
 radius = 43.011627
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1608249976]
 collision_mask = 524296
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -20,21 +20,21 @@ fire_rate = 0.15
 projectile_scene = ExtResource("2_tpg5x")
 target_indicator_scene = ExtResource("3_c3xxp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=149724159]
 texture = ExtResource("2_gfjak")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1896507330]
 shape = SubResource("CircleShape2D_v6fml")
 
-[node name="WeaponMount" type="Node2D" parent="."]
+[node name="WeaponMount" type="Node2D" parent="." unique_id=691227656]
 position = Vector2(71, -4)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1075522109]
 zoom = Vector2(0.8, 0.8)
 
-[node name="BarsContainer" type="Node2D" parent="."]
+[node name="BarsContainer" type="Node2D" parent="." unique_id=1674029551]
 position = Vector2(0, -30)
 
-[node name="HealthBar" parent="BarsContainer" instance=ExtResource("3_4kuee")]
+[node name="HealthBar" parent="BarsContainer" unique_id=1794831668 instance=ExtResource("3_4kuee")]
 offset_left = 0.0
 offset_right = 40.0

@@ -13,6 +13,8 @@ extends CharacterBody2D
 
 @export var max_health: int = 100
 
+
+
 enum MoveState {
 	IDLE,
 	MOVING_TO_DESTINATION,
@@ -36,6 +38,7 @@ var current_health: int = 0
 @onready var weapon_mount: Node2D = $WeaponMount
 @onready var bars_container: Node2D = $BarsContainer
 @onready var health_bar: Control = $BarsContainer/HealthBar
+
 
 #signal freighter_requested(call_position: Vector2)
 signal auto_fire_toggled(enabled: bool)
@@ -245,12 +248,14 @@ func take_damage(amount: int) -> void:
 	print("Player took ", amount, " damage. HP: ", current_health, "/", max_health)
 	
 	if current_health <= 0:
+
 		die()
 
 
 func die() -> void:
 	print("=== PLAYER DIED ===")
 	print("Lost cargo: ", GlobalData.cargo.current_resources)
+	
 	
 	GlobalData.reset_cargo()
 	

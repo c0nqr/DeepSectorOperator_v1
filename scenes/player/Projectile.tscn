@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d30k47ua2qr2f"]
+[gd_scene format=3 uid="uid://d30k47ua2qr2f"]
 
 [ext_resource type="Script" uid="uid://dnk8nk5ykqvgq" path="res://scenes/player/Projectile.gd" id="1_k3qbq"]
 [ext_resource type="Texture2D" uid="uid://chg85jriquxro" path="res://assets/Player_Laser.png" id="2_kimj4"]
@@ -7,17 +7,16 @@
 radius = 9.0
 height = 130.0
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" unique_id=964548177]
 collision_layer = 2
 collision_mask = 4
-monitoring = true 
 monitorable = false
 script = ExtResource("1_k3qbq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=541396115]
 texture = ExtResource("2_kimj4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=823093885]
 position = Vector2(10, -1)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_vihyi")
