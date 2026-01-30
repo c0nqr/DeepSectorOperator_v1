@@ -40,10 +40,12 @@ var current_health: int = 0
 @onready var health_bar: Control = $BarsContainer/HealthBar
 
 
-#signal freighter_requested(call_position: Vector2)
 signal auto_fire_toggled(enabled: bool)
 signal target_locked(target: CharacterBody2D)
 signal target_unlocked()
+signal health_changed(new_health: int)
+signal freighter_requested(call_position: Vector2, resource_node: Node)
+
 
 
 func _ready() -> void:
@@ -51,10 +53,12 @@ func _ready() -> void:
 	collision_mask = 4
 	
 	current_health = max_health
-	
+
 	add_to_group("player")
-	
+
 	health_bar.initialize(max_health)
+	# Emit initial health so UI connected in-editor can sync
+	health_changed.emit(current_health)
 	
 	if LevelManager:
 		LevelManager.register_player(self)
@@ -102,8 +106,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		else:
 			print("Calling freighter to cursor position")
 		
-		if LevelManager:
-			LevelManager.request_freighter_with_node(target_position, target_node)
+		# Emit a freighter request signal; LevelManager will handle the actual request when connected
+		freighter_requested.emit(target_position, target_node)
 		
 		get_viewport().set_input_as_handled()
 
@@ -243,22 +247,27 @@ func set_rotation_target(target: Vector2) -> void:
 
 
 func take_damage(amount: int) -> void:
-	current_health -= amount
-	health_bar.update_health(current_health)
-	print("Player took ", amount, " damage. HP: ", current_health, "/", max_health)
-	
-	if current_health <= 0:
+	# Backwards-compatible wrapper; forward to apply_damage
+	apply_damage(amount)
 
+
+func apply_damage(amount: int) -> void:
+	current_health -= amount
+	# Notify UI via signal (connect in-editor to HealthBar.update_health)
+	health_changed.emit(current_health)
+	print("Player took ", amount, " damage. HP: ", current_health, "/", max_health)
+
+	if current_health <= 0:
 		die()
 
 
 func die() -> void:
 	print("=== PLAYER DIED ===")
 	print("Lost cargo: ", GlobalData.cargo.current_resources)
-	
-	
-	GlobalData.reset_cargo()
-	
+
+	# Request cargo reset via global event so GlobalData handles mutation
+	GlobalData.cargo_reset_requested.emit()
+
 	call_deferred("_change_to_home")
 
 

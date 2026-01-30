@@ -28,3 +28,7 @@ func update_display() -> void:
 	
 	var health_ratio: float = float(current_health) / float(max_health)
 	fill.scale.x = health_ratio
+
+
+func _on_player_health_changed(new_health: int) -> void:
+	pass # Replace with function body.

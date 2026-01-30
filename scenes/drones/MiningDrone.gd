@@ -25,6 +25,8 @@ var mining_timer: float = 0.0
 @onready var cargo_bar: Control = $BarsContainer/CargoBar
 
 signal drone_destroyed(assigned_node: StaticBody2D)
+signal cargo_changed(new_cargo: int)
+signal health_changed(new_health: int)
 
 
 func _ready() -> void:
@@ -110,8 +112,8 @@ func process_mining(delta: float) -> void:
 			
 		if extracted > 0:
 			current_cargo += extracted
-			if cargo_bar.has_method("update_cargo"):
-				cargo_bar.update_cargo(current_cargo)
+			# Emit cargo change so UI can be connected in-editor instead of calling UI methods directly
+			cargo_changed.emit(current_cargo)
 		else:
 			print("Drone: node depleted, returning")
 			current_state = DroneState.RETURNING
@@ -152,9 +154,8 @@ func process_deposit() -> void:
 		
 	print("Drone deposited ", current_cargo, " resources to freighter")
 	current_cargo = 0
-	
-	if cargo_bar.has_method("update_cargo"):
-		cargo_bar.update_cargo(0)
+	# Emit zeroed cargo for the drone UI
+	cargo_changed.emit(0)
 	
 	if !is_instance_valid(assigned_node):
 		print("Drone: node depleted, returning")
@@ -176,8 +177,8 @@ func process_deposit() -> void:
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
-	if health_bar.has_method("update_health"):
-		health_bar.update_health(current_health)
+	# Emit health change for any connected UI
+	health_changed.emit(current_health)
 	
 	if current_health <= 0:
 		die()

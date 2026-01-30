@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://n5y8h1ny4h6r"]
+[gd_scene format=3 uid="uid://n5y8h1ny4h6r"]
 
 [ext_resource type="Script" uid="uid://bnu2ks34dmqof" path="res://scenes/drones/MiningDrone.gd" id="1_5b6eq"]
 [ext_resource type="Texture2D" uid="uid://d1s12nusq1u4t" path="res://assets/MiningDrone.png" id="1_1180t"]
@@ -9,28 +9,31 @@
 radius = 25.0
 height = 116.0
 
-[node name="MiningDrone" type="CharacterBody2D"]
+[node name="MiningDrone" type="CharacterBody2D" unique_id=1248161796]
 collision_layer = 2147483648
 collision_mask = 524296
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_5b6eq")
+max_health = 300
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1164323658]
 rotation = -1.5707964
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_1180t")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=661904663]
 position = Vector2(2, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_j14yy")
 
-[node name="BarsContainer" type="Node2D" parent="."]
+[node name="BarsContainer" type="Node2D" parent="." unique_id=1394863397]
 position = Vector2(3, -191)
 
-[node name="HealthBar" parent="BarsContainer" instance=ExtResource("2_5b6eq")]
+[node name="HealthBar" parent="BarsContainer" unique_id=672180034 instance=ExtResource("2_5b6eq")]
 
-[node name="CargoBar" parent="BarsContainer" instance=ExtResource("3_ocngy")]
+[node name="CargoBar" parent="BarsContainer" unique_id=754168145 instance=ExtResource("3_ocngy")]
 offset_top = 8.0
 offset_bottom = 12.0
+
+[connection signal="cargo_changed" from="." to="BarsContainer/CargoBar" method="update_cargo"]

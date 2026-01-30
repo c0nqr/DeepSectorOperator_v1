@@ -31,6 +31,12 @@ func _ready() -> void:
 
 func register_player(player_node: CharacterBody2D) -> void:
 	player = player_node
+	# Connect player freighter requests to LevelManager handler for centralized freighter control
+	if player_node.has_signal("freighter_requested"):
+		# Avoid duplicate connection errors by checking first (use Callable overload)
+		var freighter_callable: Callable = Callable(self, "request_freighter_with_node")
+		if not player_node.is_connected("freighter_requested", freighter_callable):
+			player_node.connect("freighter_requested", freighter_callable)
 
 
 func register_freighter(freighter_node: CharacterBody2D) -> void:
@@ -39,6 +45,18 @@ func register_freighter(freighter_node: CharacterBody2D) -> void:
 
 func register_level_root(root_node: Node2D) -> void:
 	current_level_root = root_node
+
+	# Ensure an EnemySpawner is present under the level root to manage resource node waves
+	if not current_level_root.has_node("EnemySpawner"):
+		var spawner: Node = preload("res://scripts/EnemySpawner.gd").new()
+		spawner.name = "EnemySpawner"
+		current_level_root.add_child(spawner)
+		# Register any existing resource nodes under the root
+		var resource_nodes := current_level_root.get_tree().get_nodes_in_group("resource_nodes")
+		for rn in resource_nodes:
+			# only register nodes that are under this level root
+			if rn.is_inside_tree() and rn.get_owner() == current_level_root:
+				spawner.register_resource_node(rn)
 
 
 func request_freighter_with_node(target_position: Vector2, resource_node: Node) -> void:
@@ -96,7 +114,8 @@ func spawn_portals() -> void:
 
 
 func transition_to_vault() -> void:
-	GlobalData.transfer_cargo_to_vault()
+	# Request GlobalData to transfer cargo to vault via event
+	GlobalData.transfer_to_vault_requested.emit()
 	get_tree().change_scene_to_file("res://scenes/levels/HomeMap.tscn")
 
 

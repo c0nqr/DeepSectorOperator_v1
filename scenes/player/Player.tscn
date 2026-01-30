@@ -38,3 +38,5 @@ position = Vector2(0, -30)
 [node name="HealthBar" parent="BarsContainer" unique_id=1794831668 instance=ExtResource("3_4kuee")]
 offset_left = 0.0
 offset_right = 40.0
+
+[connection signal="health_changed" from="." to="BarsContainer/HealthBar" method="update_health"]

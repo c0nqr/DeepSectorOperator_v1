@@ -26,6 +26,10 @@ func initialize(direction: Vector2, spawn_rotation: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("take_damage"):
+	# Prefer `apply_damage` if target supports it, otherwise fall back to `take_damage`.
+	if body.has_method("apply_damage"):
+		body.apply_damage(damage)
+		queue_free()
+	elif body.has_method("take_damage"):
 		body.take_damage(damage)
 		queue_free()

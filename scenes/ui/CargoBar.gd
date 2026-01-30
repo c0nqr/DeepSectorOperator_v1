@@ -28,3 +28,7 @@ func update_display() -> void:
 	
 	var cargo_ratio: float = float(current_cargo) / float(max_cargo)
 	fill.scale.x = cargo_ratio
+
+
+func _on_mining_drone_cargo_changed(new_cargo: int) -> void:
+	pass # Replace with function body.

@@ -30,6 +30,8 @@ var active_drone: CharacterBody2D = null
 
 signal arrived_at_destination()
 signal cargo_full()
+signal cargo_changed(new_cargo: int)
+signal health_changed(new_health: int)
 
 func _ready() -> void:
 	collision_layer = 16
@@ -137,8 +139,10 @@ func _do_spawn_drone(target_node: StaticBody2D) -> void:
 
 func add_cargo(amount: int) -> void:
 	current_cargo += amount
-	cargo_bar.update_cargo(current_cargo)
-	GlobalData.add_cargo(amount)
+	# Emit cargo_changed for scene-local UI and publish collection event to GlobalData
+	cargo_changed.emit(current_cargo)
+	# Publish collection event to GlobalData
+	GlobalData.cargo_collected.emit(amount)
 	print("Freighter cargo: ", current_cargo, "/", max_cargo)
 	
 	if current_cargo >= max_cargo:
@@ -151,7 +155,8 @@ func is_cargo_full() -> bool:
 
 func take_damage(amount: int) -> void:
 	current_health -= amount
-	health_bar.update_health(current_health)
+	# Emit health change for connected UI
+	health_changed.emit(current_health)
 	print("Freighter took ", amount, " damage. HP: ", current_health, "/", max_health)
 	
 	if current_health <= 0:
@@ -159,7 +164,8 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	print("Freighter destroyed! Going home.")
-	GlobalData.transfer_cargo_to_vault()
+	# Request transfer of cargo to vault via global event
+	GlobalData.transfer_to_vault_requested.emit()
 	get_tree().change_scene_to_file("res://scenes/levels/HomeMap.tscn")
 	queue_free()
 

@@ -25,6 +25,8 @@ var waiting_for_next_wave: bool = false
 signal resources_depleted()
 signal hover_started()
 signal hover_ended()
+signal node_mining_started(node: Node)
+signal node_mining_completed(node: Node)
 
 
 func _ready() -> void:
@@ -56,54 +58,12 @@ func _process(delta: float) -> void:
 	elif not should_hover and is_mouse_hovering:
 		_on_mouse_exited()
 	
+	# Spawning is handled by EnemySpawner now; ResourceNode only tracks mining state
 	if is_being_mined:
-		process_wave_spawning(delta)
+		pass
 
 
-func process_wave_spawning(delta: float) -> void:
-	if current_wave >= total_waves:
-		return
-	
-	if waiting_for_next_wave:
-		wave_delay_timer -= delta
-		if wave_delay_timer <= 0.0:
-			waiting_for_next_wave = false
-			current_wave += 1
-			enemies_spawned_this_wave = 0
-			wave_spawn_timer = 0.0
-			
-			if current_wave < total_waves:
-				print(name, " - Wave ", current_wave + 1, " starting!")
-		return
-	
-	wave_spawn_timer -= delta
-	
-	if wave_spawn_timer <= 0.0 and enemies_spawned_this_wave < enemies_per_wave:
-		spawn_enemy()
-		
-		enemies_spawned_this_wave += 1
-		wave_spawn_timer = spawn_interval_within_wave
-		
-		if enemies_spawned_this_wave >= enemies_per_wave:
-			if current_wave < total_waves - 1:
-				waiting_for_next_wave = true
-				wave_delay_timer = delay_between_waves
-				print(name, " - Wave ", current_wave + 1, " complete. Next wave in ", delay_between_waves, " seconds.")
-			else:
-				current_wave = total_waves
-				print(name, " - All waves complete!")
-
-
-func spawn_enemy() -> void:
-	if enemy_scene == null:
-		push_error("Enemy scene not assigned to ResourceNode!")
-		return
-	
-	var enemy: CharacterBody2D = enemy_scene.instantiate()
-	get_tree().current_scene.add_child(enemy)
-	enemy.global_position = enemy_spawn_point.global_position
-	
-	print(name, " - Wave ", current_wave + 1, ": Enemy ", enemies_spawned_this_wave + 1, "/", enemies_per_wave, " spawned")
+# Spawning responsibilities moved to EnemySpawner. ResourceNode keeps resource data and emits mining signals.
 
 func extract_resources(amount: int) -> int:
 	var extracted: int = min(amount, current_resources)
@@ -128,11 +88,17 @@ func _on_mining_started() -> void:
 	wave_spawn_timer = 0.0
 	waiting_for_next_wave = false
 	print(name, " - Mining started. Wave 1 beginning!")
+	
+	# Notify the EnemySpawner (via node signal) that this node started mining
+	node_mining_started.emit(self)
 
 
 func _on_mining_completed() -> void:
 	is_being_mined = false
 	print(name, " - Mining completed. Waves stopped.")
+	
+	# Notify the EnemySpawner that this node stopped mining
+	node_mining_completed.emit(self)
 
 
 func _on_mouse_entered() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://da8htg7y88mb0"]
+[gd_scene format=3 uid="uid://da8htg7y88mb0"]
 
 [ext_resource type="Texture2D" uid="uid://bdlyfw7s255qr" path="res://assets/Freighter.png" id="1_l0n40"]
 [ext_resource type="Script" uid="uid://j383vk55kxtc" path="res://scenes/Freighter/Freighter.gd" id="1_r3dfe"]
@@ -10,7 +10,7 @@
 radius = 197.0
 height = 1394.0
 
-[node name="Freighter" type="CharacterBody2D"]
+[node name="Freighter" type="CharacterBody2D" unique_id=677593230]
 collision_layer = 32768
 collision_mask = 524296
 motion_mode = 1
@@ -19,22 +19,25 @@ max_health = 2000
 acceleration = 50.0
 drone_scene = ExtResource("2_b801q")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=843628277]
 rotation = 3.1415927
 texture = ExtResource("1_l0n40")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1271067491]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_r3dfe")
 
-[node name="DroneSpawnPoint" type="Marker2D" parent="."]
+[node name="DroneSpawnPoint" type="Marker2D" parent="." unique_id=592259191]
 position = Vector2(218, 173)
 
-[node name="BarsContainer" type="Node2D" parent="."]
+[node name="BarsContainer" type="Node2D" parent="." unique_id=1930023671]
 position = Vector2(31, -400)
 
-[node name="HealthBar" parent="BarsContainer" instance=ExtResource("4_q6238")]
+[node name="HealthBar" parent="BarsContainer" unique_id=1808510758 instance=ExtResource("4_q6238")]
 
-[node name="CargoBar" parent="BarsContainer" instance=ExtResource("5_o0w3t")]
+[node name="CargoBar" parent="BarsContainer" unique_id=2131071893 instance=ExtResource("5_o0w3t")]
 offset_top = 8.0
 offset_bottom = 12.0
+
+[connection signal="cargo_changed" from="." to="BarsContainer/CargoBar" method="update_cargo"]
+[connection signal="health_changed" from="." to="BarsContainer/HealthBar" method="update_health"]

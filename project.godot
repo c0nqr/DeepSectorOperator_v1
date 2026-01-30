@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Deep Sector Operator"
+config/name="Deep Sector Operator V1"
 run/main_scene="uid://bbloqi5c5obf7"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/icon.svg"

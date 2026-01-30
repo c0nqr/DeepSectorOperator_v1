@@ -160,16 +160,17 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	current_state = BossState.DEAD
-	
-	GlobalData.add_cargo(resource_drop)
-	
+
+	# Emit global event for resource drops so GlobalData handles mutation
+	GlobalData.entity_died.emit(self, resource_drop)
+
 	print("BOSS DEFEATED! Dropped ", resource_drop, " resources.")
-	
+
 	boss_defeated.emit()
-	
+
 	if LevelManager:
 		LevelManager.on_boss_defeated()
-	
+
 	queue_free()
 
 

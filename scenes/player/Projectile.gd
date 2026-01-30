@@ -25,11 +25,15 @@ func initialize(direction: Vector2, spawn_rotation: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemies") and body.has_method("take_damage"):
+	# Prefer the standardized `apply_damage` method if present, fall back to `take_damage`
+	if body.has_method("apply_damage"):
+		body.apply_damage(damage)
+		_handle_pierce()
+	elif body.has_method("take_damage"):
 		body.take_damage(damage)
 		_handle_pierce()
 	else:
-		print("  -> Ignoring (not enemy or no damage method)")
+		print("  -> Ignoring (no damage API on target: ", body, ")")
 
 
 func _handle_pierce() -> void:

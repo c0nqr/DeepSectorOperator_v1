@@ -26,6 +26,7 @@ var retarget_timer: float = 0.0
 @onready var detection_area: Area2D = $DetectionArea
 
 var current_health: int = 0
+signal health_changed(new_health: int)
 
 
 func _ready() -> void:
@@ -180,20 +181,23 @@ func find_nearest_target() -> void:
 func take_damage(amount: int) -> void:
 	if current_state == EnemyState.DEAD:
 		return
-	
+
 	current_health -= amount
-	
+	# Emit health changed for UI or systems listening
+	health_changed.emit(current_health)
+
 	if current_health <= 0:
 		die()
 
 
 func die() -> void:
 	current_state = EnemyState.DEAD
-	
-	GlobalData.add_cargo(resource_drop_amount)
-	
+
+	# Emit global event for resource drops; GlobalData handles adding cargo
+	GlobalData.entity_died.emit(self, resource_drop_amount)
+
 	print(name, " destroyed! Dropped ", resource_drop_amount, " resources.")
-	
+
 	queue_free()
 
 
