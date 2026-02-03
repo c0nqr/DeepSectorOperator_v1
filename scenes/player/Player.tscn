@@ -33,7 +33,7 @@ position = Vector2(71, -4)
 zoom = Vector2(0.8, 0.8)
 
 [node name="BarsContainer" type="Node2D" parent="." unique_id=1674029551]
-position = Vector2(0, -30)
+position = Vector2(0, -84)
 
 [node name="HealthBar" parent="BarsContainer" unique_id=1794831668 instance=ExtResource("3_4kuee")]
 offset_left = 0.0

@@ -1,0 +1,193 @@
+MiningDrone.tscn:
+CharacterBody2D (name: "MiningDrone", scene: "res://scenes/drones/MiningDrone.tscn", script: "res://scenes/drones/MiningDrone.gd")
+├── Sprite2D
+├── CollisionShape2D
+└── Node2D (name: "BarsContainer")
+	├── Control (name: "HealthBar", scene: "res://scenes/ui/HealthBar.tscn", script: "res://scenes/ui/HealthBar.gd")
+	│   ├── ColorRect (name: "Background")
+	│   └── ColorRect (name: "Fill")
+	└── Control (name: "CargoBar", scene: "res://scenes/ui/CargoBar.tscn", script: "res://scenes/ui/CargoBar.gd")
+		├── ColorRect (name: "Background")
+		└── ColorRect (name: "Fill")
+
+Boss.tscn:
+CharacterBody2D (name: "Boss", scene: "res://scenes/enemies/Boss.tscn", script: "res://scenes/enemies/Boss.gd")
+├── Sprite2D
+├── CollisionShape2D
+├── Area2D (name: "DetectionArea")
+│   └── CollisionShape2D
+├── Line2D (name: "LaserBeam")
+└── RayCast2D (name: "LaserRaycast")
+
+Enemy.tscn:
+CharacterBody2D (name: "Enemy", scene: "res://scenes/enemies/Enemy.tscn", script: "res://scenes/enemies/Enemy.gd")
+├── Sprite2D
+├── CollisionShape2D
+└── Area2D (name: "DetectionArea")
+	└── CollisionShape2D
+
+EnemyProjectile.tscn:
+Area2D (name: "EnemyProjectile", scene: "res://scenes/enemies/EnemyProjectile.tscn", script: "res://scenes/enemies/EnemyProjectile.gd")
+├── Sprite2D
+└── CollisionShape2D
+
+Freighter.tscn:
+CharacterBody2D (name: "Freighter", scene: "res://scenes/Freighter/Freighter.tscn", script: "res://scenes/Freighter/Freighter.gd")
+├── Sprite2D
+├── CollisionShape2D
+├── Marker2D (name: "DroneSpawnPoint")
+└── Node2D (name: "BarsContainer")
+	├── Control (name: "HealthBar", scene: "res://scenes/ui/HealthBar.tscn", script: "res://scenes/ui/HealthBar.gd")
+	│   ├── ColorRect (name: "Background")
+	│   └── ColorRect (name: "Fill")
+	└── Control (name: "CargoBar", scene: "res://scenes/ui/CargoBar.tscn", script: "res://scenes/ui/CargoBar.gd")
+		├── ColorRect (name: "Background")
+		└── ColorRect (name: "Fill")
+
+HomeMap.tscn:
+Node2D (name: "HomeMap", scene: "res://scenes/levels/HomeMap.tscn", script: "res://scenes/levels/HomeMap.gd")
+├── Parallax2D
+│   └── Sprite2D
+├── Parallax2D (name: "Parallax2D2")
+│   └── Sprite2D
+├── CharacterBody2D (name: "Player", scene: "res://scenes/player/Player.tscn", script: "res://scenes/player/Player.gd")
+│   ├── Sprite2D
+│   ├── CollisionShape2D
+│   ├── Node2D (name: "WeaponMount")
+│   ├── Camera2D
+│   └── Node2D (name: "BarsContainer")
+│       └── Control (name: "HealthBar", scene: "res://scenes/ui/HealthBar.tscn", script: "res://scenes/ui/HealthBar.gd")
+│           ├── ColorRect (name: "Background")
+│           └── ColorRect (name: "Fill")
+├── Area2D (name: "Portal", scene: "res://scenes/levels/Portal.tscn", script: "res://scenes/levels/Portal.gd")
+│   ├── Sprite2D
+│   └── CollisionShape2D
+├── Camera2D
+└── CanvasLayer (name: "HomeMapUI", scene: "res://scenes/ui/HomeMapUI.tscn", script: "res://scenes/ui/HomeMapUI.gd")
+	└── Control (name: "Container")
+		└── VBoxContainer
+			├── Label (name: "TitleLabel")
+			├── Label (name: "VaultLabel")
+			└── Label (name: "CargoLabel")
+
+Portal.tscn:
+Area2D (name: "Portal", scene: "res://scenes/levels/Portal.tscn", script: "res://scenes/levels/Portal.gd")
+├── Sprite2D
+└── CollisionShape2D
+
+TestLevel.tscn:
+Node2D (name: "TestLevel", scene: "res://scenes/levels/TestLevel.tscn", script: "res://scenes/levels/TestLevel.gd")
+├── Parallax2D
+│   └── Sprite2D
+├── Parallax2D (name: "Parallax2D2")
+│   └── Sprite2D
+├── CanvasLayer (name: "WaveUI", scene: "res://scenes/ui/WaveUI.tscn", script: "res://scenes/ui/WaveUI.gd")
+│   └── Control (name: "Container")
+│       └── Label (name: "WaveLabel")
+├── CanvasLayer (name: "BossHealthBar", scene: "res://scenes/ui/BossHealthBar.tscn", script: "res://scenes/ui/BossHealthBar.gd")
+│   └── Control (name: "Container")
+│       └── Panel
+│           ├── ProgressBar
+│           └── Label
+├── StaticBody2D (name: "ResourceNode", scene: "res://scenes/resources/ResourceNode.tscn", script: "res://scenes/resources/ResourceNode.gd")
+│   ├── Sprite2D
+│   ├── CollisionShape2D
+│   ├── Area2D (name: "HoverDetector")
+│   │   └── CollisionShape2D
+│   ├── Node2D (name: "ParkingMarker")
+│   ├── Marker2D (name: "EnemySpawnPoint")
+│   │   └── Sprite2D
+│   └── Node2D (name: "DockDirection")
+├── CharacterBody2D (name: "Boss", scene: "res://scenes/enemies/Boss.tscn", script: "res://scenes/enemies/Boss.gd")
+│   ├── Sprite2D
+│   ├── CollisionShape2D
+│   ├── Area2D (name: "DetectionArea")
+│   │   └── CollisionShape2D
+│   ├── Line2D (name: "LaserBeam")
+│   └── RayCast2D (name: "LaserRaycast")
+├── CharacterBody2D (name: "Freighter", scene: "res://scenes/Freighter/Freighter.tscn", script: "res://scenes/Freighter/Freighter.gd")
+│   ├── Sprite2D
+│   ├── CollisionShape2D
+│   ├── Marker2D (name: "DroneSpawnPoint")
+│   └── Node2D (name: "BarsContainer")
+│       ├── Control (name: "HealthBar", scene: "res://scenes/ui/HealthBar.tscn", script: "res://scenes/ui/HealthBar.gd")
+│       │   ├── ColorRect (name: "Background")
+│       │   └── ColorRect (name: "Fill")
+│       └── Control (name: "CargoBar", scene: "res://scenes/ui/CargoBar.tscn", script: "res://scenes/ui/CargoBar.gd")
+│           ├── ColorRect (name: "Background")
+│           └── ColorRect (name: "Fill")
+├── CharacterBody2D (name: "Enemy", scene: "res://scenes/enemies/Enemy.tscn", script: "res://scenes/enemies/Enemy.gd")
+│   ├── Sprite2D
+│   ├── CollisionShape2D
+│   └── Area2D (name: "DetectionArea")
+│       └── CollisionShape2D
+└── CharacterBody2D (name: "Player", scene: "res://scenes/player/Player.tscn", script: "res://scenes/player/Player.gd")
+	├── Sprite2D
+	├── CollisionShape2D
+	├── Node2D (name: "WeaponMount")
+	├── Camera2D
+	└── Node2D (name: "BarsContainer")
+		└── Control (name: "HealthBar", scene: "res://scenes/ui/HealthBar.tscn", script: "res://scenes/ui/HealthBar.gd")
+			├── ColorRect (name: "Background")
+			└── ColorRect (name: "Fill")
+
+Player.tscn:
+CharacterBody2D (name: "Player", scene: "res://scenes/player/Player.tscn", script: "res://scenes/player/Player.gd")
+├── Sprite2D
+├── CollisionShape2D
+├── Node2D (name: "WeaponMount")
+├── Camera2D
+└── Node2D (name: "BarsContainer")
+	└── Control (name: "HealthBar", scene: "res://scenes/ui/HealthBar.tscn", script: "res://scenes/ui/HealthBar.gd")
+		├── ColorRect (name: "Background")
+		└── ColorRect (name: "Fill")
+
+Projectile.tscn:
+Area2D (name: "Projectile", scene: "res://scenes/player/Projectile.tscn", script: "res://scenes/player/Projectile.gd")
+├── Sprite2D
+└── CollisionShape2D
+
+TargetIndicator.tscn:
+Node2D (name: "TargetIndicator", scene: "res://scenes/player/TargetIndicator.tscn", script: "res://scenes/player/TargetIndicator.gd")
+└── Sprite2D
+
+ResourceNode.tscn:
+StaticBody2D (name: "ResourceNode", scene: "res://scenes/resources/ResourceNode.tscn", script: "res://scenes/resources/ResourceNode.gd")
+├── Sprite2D
+├── CollisionShape2D
+├── Area2D (name: "HoverDetector")
+│   └── CollisionShape2D
+├── Node2D (name: "ParkingMarker")
+├── Marker2D (name: "EnemySpawnPoint")
+│   └── Sprite2D
+└── Node2D (name: "DockDirection")
+
+BossHealthBar.tscn:
+CanvasLayer (name: "BossHealthBar", scene: "res://scenes/ui/BossHealthBar.tscn", script: "res://scenes/ui/BossHealthBar.gd")
+└── Control (name: "Container")
+	└── Panel
+		├── ProgressBar
+		└── Label
+
+CargoBar.tscn:
+Control (name: "CargoBar", scene: "res://scenes/ui/CargoBar.tscn", script: "res://scenes/ui/CargoBar.gd")
+├── ColorRect (name: "Background")
+└── ColorRect (name: "Fill")
+
+HealthBar.tscn:
+Control (name: "HealthBar", scene: "res://scenes/ui/HealthBar.tscn", script: "res://scenes/ui/HealthBar.gd")
+├── ColorRect (name: "Background")
+└── ColorRect (name: "Fill")
+
+HomeMapUI.tscn:
+CanvasLayer (name: "HomeMapUI", scene: "res://scenes/ui/HomeMapUI.tscn", script: "res://scenes/ui/HomeMapUI.gd")
+└── Control (name: "Container")
+	└── VBoxContainer
+		├── Label (name: "TitleLabel")
+		├── Label (name: "VaultLabel")
+		└── Label (name: "CargoLabel")
+
+WaveUI.tscn:
+CanvasLayer (name: "WaveUI", scene: "res://scenes/ui/WaveUI.tscn", script: "res://scenes/ui/WaveUI.gd")
+└── Control (name: "Container")
+	└── Label (name: "WaveLabel")

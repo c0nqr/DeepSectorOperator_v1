@@ -28,6 +28,10 @@ LevelManager="*res://scripts/autoloads/LevelManager.gd"
 
 window/size/mode=2
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/scene_tree_as_text/plugin.cfg")
+
 [input]
 
 move_action={

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://clv6xqtfgmqdp"]
+[gd_scene format=3 uid="uid://clv6xqtfgmqdp"]
 
 [ext_resource type="Script" uid="uid://uh6pfbkqk4dv" path="res://scenes/ui/HealthBar.gd" id="1_5fhnc"]
 
-[node name="HealthBar" type="Control"]
+[node name="HealthBar" type="Control" unique_id=885604870]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -13,7 +13,7 @@ offset_bottom = 6.0
 grow_horizontal = 2
 script = ExtResource("1_5fhnc")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1606347998]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.16206557, 0.1620656, 0.16206557, 1)
 
-[node name="Fill" type="ColorRect" parent="."]
+[node name="Fill" type="ColorRect" parent="." unique_id=759826788]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
